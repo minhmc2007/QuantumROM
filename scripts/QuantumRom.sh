@@ -1000,8 +1000,15 @@ PATCH_SECSETTINGS() {
         return 1
     fi
 
-    cp -rf "$MOD_DIR/res/values/strings.xml" "$SECSETTINGS_DIR/res/values/"
-    cp -rf "$MOD_DIR/res/values/public.xml" "$SECSETTINGS_DIR/res/values/"
+    sed -i '/<\/resources>/i\
+    <string name="quantum_rom_title">About QuantumROM<\/string>\
+    <string name="quantum_rom_credits">Credit to those people: SN-Abdullah-Al-Noman, david7xw, SameerAlSahab and minhmc2007<\/string>' "$SECSETTINGS_DIR/res/values/strings.xml"
+
+    sed -i '/<\/resources>/i\
+    <public type="drawable" name="quantum_rom_banner" id="0x7f081100" \/>\
+    <public type="id" name="quantum_banner" id="0x7f0b1400" \/>\
+    <public type="layout" name="quantum_rom_banner" id="0x7f0e0e00" \/>\
+    <public type="xml" name="sec_quantum_rom_info" id="0x7f180350" \/>' "$SECSETTINGS_DIR/res/values/public.xml"
     cp -rf "$MOD_DIR/res/layout/quantum_rom_banner.xml" "$SECSETTINGS_DIR/res/layout/"
     cp -rf "$MOD_DIR/res/xml/sec_quantum_rom_info.xml" "$SECSETTINGS_DIR/res/xml/"
     cp -rf "$MOD_DIR/res/xml/sec_top_level_settings.xml" "$SECSETTINGS_DIR/res/xml/"
