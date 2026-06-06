@@ -49,13 +49,21 @@ DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$FIRM_D
 DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework/services.jar" "$WORK_DIR"
 DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework/samsungkeystoreutils.jar" "$WORK_DIR"
 
+echo -e "\n[SecSettings] Searching for SecSettings.apk..."
 SEC_SETTINGS_APK=$(find "$FIRM_DIR/$TARGET_DEVICE" -name "SecSettings.apk" | head -n 1)
 if [ -n "$SEC_SETTINGS_APK" ]; then
+    echo -e "[SecSettings] Found at: $SEC_SETTINGS_APK"
+    echo -e "[SecSettings] Decompiling..."
     SEC_SETTINGS_DIR=$(dirname "$SEC_SETTINGS_APK")
     DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$SEC_SETTINGS_APK" "$WORK_DIR"
+    echo -e "[SecSettings] Patching with About QuantumROM..."
     PATCH_SECSETTINGS "$WORK_DIR/SecSettings"
+    echo -e "[SecSettings] Recompiling..."
     RECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$WORK_DIR/SecSettings" "$WORK_DIR"
     mv -f "$WORK_DIR/SecSettings.apk" "$SEC_SETTINGS_APK"
+    echo -e "[SecSettings] Done! Patched APK placed back at: $SEC_SETTINGS_APK"
+else
+    echo -e "[SecSettings] WARNING: SecSettings.apk not found in firmware! Skipping About QuantumROM patch."
 fi
 
 PATCH_SSRM "$WORK_DIR/ssrm"
