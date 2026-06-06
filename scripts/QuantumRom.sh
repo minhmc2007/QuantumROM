@@ -982,6 +982,36 @@ PATCH_SSRM() {
 }
 
 
+PATCH_SECSETTINGS() {
+    echo " "
+
+    if [ "$#" -ne 1 ]; then
+        echo -e "Usage: ${FUNCNAME[0]} <EXTRACTED_SECSETTINGS_DIRECTORY>"
+        return 1
+    fi
+
+    local SECSETTINGS_DIR="$1"
+    local MOD_DIR="$(pwd)/QuantumROM/Mods/Settings/SecSettings.apk"
+
+    echo -e "Applying QuantumROM About section to SecSettings."
+
+    if [ ! -d "$MOD_DIR" ]; then
+        echo -e "- Mod directory not found: $MOD_DIR"
+        return 1
+    fi
+
+    cp -rf "$MOD_DIR/res/values/strings.xml" "$SECSETTINGS_DIR/res/values/"
+    cp -rf "$MOD_DIR/res/values/public.xml" "$SECSETTINGS_DIR/res/values/"
+    cp -rf "$MOD_DIR/res/layout/quantum_rom_banner.xml" "$SECSETTINGS_DIR/res/layout/"
+    cp -rf "$MOD_DIR/res/xml/sec_quantum_rom_info.xml" "$SECSETTINGS_DIR/res/xml/"
+    cp -rf "$MOD_DIR/res/xml/sec_top_level_settings.xml" "$SECSETTINGS_DIR/res/xml/"
+    cp -rf "$MOD_DIR/res/drawable/quantum_rom_banner.webp" "$SECSETTINGS_DIR/res/drawable/"
+
+    mkdir -p "$SECSETTINGS_DIR/smali_classes5/com/quantum/rom/"
+    cp -rf "$MOD_DIR/smali_classes5/com/quantum/rom/." "$SECSETTINGS_DIR/smali_classes5/com/quantum/rom/"
+}
+
+
 PATCH_BT_LIB() {
     echo " "
 
