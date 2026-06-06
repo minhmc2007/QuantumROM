@@ -49,13 +49,13 @@ DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$FIRM_D
 DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework/services.jar" "$WORK_DIR"
 DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework/samsungkeystoreutils.jar" "$WORK_DIR"
 
-SEC_SETTINGS_APK=$(find "$FIRM_DIR/$TARGET_DEVICE" -name "SecSettings2.apk" | head -n 1)
+SEC_SETTINGS_APK=$(find "$FIRM_DIR/$TARGET_DEVICE" -name "SecSettings.apk" | head -n 1)
 if [ -n "$SEC_SETTINGS_APK" ]; then
     SEC_SETTINGS_DIR=$(dirname "$SEC_SETTINGS_APK")
     DECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$SEC_SETTINGS_APK" "$WORK_DIR"
-    PATCH_SECSETTINGS "$WORK_DIR/SecSettings2"
-    RECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$WORK_DIR/SecSettings2" "$WORK_DIR"
-    mv -f "$WORK_DIR/SecSettings2.apk" "$SEC_SETTINGS_APK"
+    PATCH_SECSETTINGS "$WORK_DIR/SecSettings"
+    RECOMPILE "$APKTOOL" "$FIRM_DIR/$TARGET_DEVICE/system/system/framework" "$WORK_DIR/SecSettings" "$WORK_DIR"
+    mv -f "$WORK_DIR/SecSettings.apk" "$SEC_SETTINGS_APK"
 fi
 
 PATCH_SSRM "$WORK_DIR/ssrm"
