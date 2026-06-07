@@ -1006,7 +1006,6 @@ PATCH_SECSETTINGS() {
 
     sed -i '/<\/resources>/i\
     <public type="drawable" name="quantum_rom_banner" id="0x7f081100" \/>\
-    <public type="id" name="quantum_banner" id="0x7f0b1400" \/>\
     <public type="layout" name="quantum_rom_banner" id="0x7f0e0e00" \/>\
     <public type="xml" name="sec_quantum_rom_info" id="0x7f180350" \/>' "$SECSETTINGS_DIR/res/values/public.xml"
     cp -rf "$MOD_DIR/res/layout/quantum_rom_banner.xml" "$SECSETTINGS_DIR/res/layout/"
