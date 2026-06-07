@@ -98,7 +98,7 @@ jobs:
           fi
 
           echo "Creating zip: $ZIP_NAME"
-          7z a -tzip "$ZIP_PATH" "$OUT_DIR"/* -mx=5
+          7z a -tzip "$ZIP_PATH" "$OUT_DIR"/* -mx=5 -mmt=on
           echo "ZIP_PATH=$ZIP_PATH" >> $GITHUB_ENV
 
       - name: Upload file in GoFile & Create Release.
