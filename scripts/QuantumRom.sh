@@ -185,7 +185,7 @@ DOWNLOAD_FIRMWARE() {
     fi
 
     # --- Step 2: Download Firmware ---
-    python3 -m samloader -m "$MODEL" -r "$CSC" -i "$IMEI" download -v "$VERSION" -O "$DOWN_DIR"
+    python3 -m samloader -m "$MODEL" -r "$CSC" -i "$IMEI" download -v "$VERSION" -O "$DOWN_DIR" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo -e "⛔️ Download failed. Check IMEI/MODEL/CSC."
         exit 1
