@@ -1015,6 +1015,9 @@ PATCH_SECSETTINGS() {
 
     mkdir -p "$SECSETTINGS_DIR/smali_classes5/com/quantum/rom/"
     cp -rf "$MOD_DIR/smali_classes5/com/quantum/rom/." "$SECSETTINGS_DIR/smali_classes5/com/quantum/rom/"
+
+    # Fix private resource references in arrays.xml
+    find "$SECSETTINGS_DIR/res" -name "arrays.xml" -exec sed -i 's/@android:drawable/@*android:drawable/g' {} +
 }
 
 
